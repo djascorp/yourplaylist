@@ -1,6 +1,6 @@
-# **YouPlaylist**
+# **YourPlaylist**
 
-YouPlaylist is a collaborative playlist management web application. Create playlists, share them with others, and enjoy audio-only playback of YouTube videos.
+YourPlaylist is a collaborative playlist management web application. Create playlists, share them with others, and enjoy audio-only playback of YouTube videos.
 
 ---
 
@@ -14,7 +14,7 @@ YouPlaylist is a collaborative playlist management web application. Create playl
 ---
 
 ## **Technologies**
-- **Frontend**: HTML, CSS, JavaScript (React.js or Vue.js)
+- **Frontend**: React.native
 - **Backend**: Node.js, Express.js
 - **Database**: MySQL
 - **Audio Streaming**: `yt-stream`
@@ -27,8 +27,8 @@ YouPlaylist is a collaborative playlist management web application. Create playl
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/djascorp/youplaylist.git
-   cd youplaylist
+   git clone https://github.com/djascorp/yourplaylist.git
+   cd yourplaylist
    ```
 
 2. **Install dependencies**:
@@ -46,7 +46,7 @@ YouPlaylist is a collaborative playlist management web application. Create playl
    DB_HOST=localhost
    DB_USER=root
    DB_PASSWORD=yourpassword
-   DB_NAME=youplaylist
+   DB_NAME=yourplaylist
    JWT_SECRET=your_jwt_secret
    ```
 
@@ -74,7 +74,7 @@ YouPlaylist is a collaborative playlist management web application. Create playl
 
 ## **Folder Structure**
 ```
-youplaylist/
+yourplaylist/
 ├── config/                  # Configuration files
 ├── controllers/             # Route controllers
 ├── models/                  # Database models
@@ -115,4 +115,4 @@ For any questions or feedback, please contact:
 
 ---
 
-Enjoy creating and sharing playlists with **YouPlaylist**! 🎶
+Enjoy creating and sharing playlists with **YourPlaylist**! 🎶
