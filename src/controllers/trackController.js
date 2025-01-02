@@ -80,7 +80,7 @@ exports.getTracksByPlaylist = async (req, res) => {
  * @param {Object} res - The response object.
  */
 exports.deleteTrack = async (req, res) => {
-    const { id } = req.params;
+    const { trackId : id } = req.params;
 
     try {
         const result = await Track.deleteById(id);

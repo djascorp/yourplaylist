@@ -10,7 +10,7 @@ const db = require('../config/db');
 
 // // Après tous les tests, nettoyez la base de données
 afterAll(async () => {
-    await db.query('TRUNCATE TABLE IF EXISTS playlists');
+    await db.query('TRUNCATE TABLE playlists');
     await db.end();
 });
 

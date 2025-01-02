@@ -1,29 +1,3 @@
-### Créer une nouvelle playlist
-POST http://localhost:3000/api/playlists
-Content-Type: application/json
-
-{
-  "name": "My Favorite Songs",
-  "owner_id": 1
-}
-
-### Récupérer une playlist par ID
-GET http://localhost:3000/api/playlists/1
-
-### Ajouter une piste à une playlist
-POST http://localhost:3000/api/playlists/1/tracks
-Content-Type: application/json
-
-{
-  "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  "title": "Never Gonna Give You Up",
-  "duration": 213,
-  "added_by": 1
-}
-
-### Streamer l'audio d'une vidéo YouTube
-GET http://localhost:3000/api/tracks/stream?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
 ### Enregistrer un nouvel utilisateur
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
@@ -43,11 +17,42 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### Créer une nouvelle playlist
+POST http://localhost:3000/api/playlists
+Content-Type: application/json
+# Authorization: Bearer <your_jwt_token>
+
+{
+  "name": "My Playlist"
+}
+
+### Récupérer une playlist par ID
+GET http://localhost:3000/api/playlists/1
+# Authorization: Bearer <your_jwt_token>
+
+### Ajouter une piste à une playlist
+POST http://localhost:3000/api/playlists/1/tracks
+Content-Type: application/json
+# Authorization: Bearer <your_jwt_token>
+
+{
+  "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "title": "Never Gonna Give You Up",
+  "duration": 213
+}
+
 ### Récupérer toutes les pistes d'une playlist
-GET http://localhost:3000/api/tracks/playlist/1
+GET http://localhost:3000/api/playlists/1/tracks
+# Authorization: Bearer <your_jwt_token>
 
-### Supprimer une piste par ID
+### Supprimer une piste par son ID
 DELETE http://localhost:3000/api/tracks/1
+# Authorization: Bearer <your_jwt_token>
 
-### Supprimer une playlist par ID
+### Supprimer une playlist par son ID
 DELETE http://localhost:3000/api/playlists/1
+# Authorization: Bearer <your_jwt_token>
+
+### Streamer l'audio d'une vidéo YouTube
+GET http://localhost:3000/api/tracks/stream?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ
+# Authorization: Bearer <your_jwt_token>

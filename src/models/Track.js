@@ -30,6 +30,7 @@ class Track {
      * @returns {Promise} - The result of the query.
      */
     static async deleteById(id) {
+        console.log("ID TRACK", id)
         const [result] = await db.query('DELETE FROM tracks WHERE id = ?', [id]);
         return result;
     }
