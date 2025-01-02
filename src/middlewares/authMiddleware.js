@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 
-// Option pour autoriser l'utilisateur "Visiteur"
-const AUTHORIZE_GUEST = process.env.AUTHORIZE_GUEST === 'true'; // Activez cette option dans .env
 
 const authenticate = async (req, res, next) => {
+    // Option pour autoriser l'utilisateur "Visiteur"
+    const AUTHORIZE_GUEST = process.env.AUTHORIZE_GUEST == 'true'; // Activez cette option dans .env
+
     try {
         // Récupérer le token de l'en-tête Authorization
         const token = req.header('Authorization')?.replace('Bearer ', '');
