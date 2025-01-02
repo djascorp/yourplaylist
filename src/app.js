@@ -1,12 +1,13 @@
+const dotenv = require('dotenv');
+// Load environment variables
+dotenv.config();
+
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
+
 const playlistRoutes = require('./routes/playlistRoutes');
 const trackRoutes = require('./routes/trackRoutes');
 // const authRoutes = require('./routes/authRoutes');
-
-// Load environment variables
-dotenv.config();
 
 // Initialize Express app
 const app = express();
