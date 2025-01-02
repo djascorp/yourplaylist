@@ -1,0 +1,53 @@
+### Créer une nouvelle playlist
+POST http://localhost:3000/api/playlists
+Content-Type: application/json
+
+{
+  "name": "My Favorite Songs",
+  "owner_id": 1
+}
+
+### Récupérer une playlist par ID
+GET http://localhost:3000/api/playlists/1
+
+### Ajouter une piste à une playlist
+POST http://localhost:3000/api/playlists/1/tracks
+Content-Type: application/json
+
+{
+  "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "title": "Never Gonna Give You Up",
+  "duration": 213,
+  "added_by": 1
+}
+
+### Streamer l'audio d'une vidéo YouTube
+GET http://localhost:3000/api/tracks/stream?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+### Enregistrer un nouvel utilisateur
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Connecter un utilisateur
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+### Récupérer toutes les pistes d'une playlist
+GET http://localhost:3000/api/tracks/playlist/1
+
+### Supprimer une piste par ID
+DELETE http://localhost:3000/api/tracks/1
+
+### Supprimer une playlist par ID
+DELETE http://localhost:3000/api/playlists/1
