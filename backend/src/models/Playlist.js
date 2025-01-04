@@ -15,6 +15,29 @@ class Playlist {
     }
 
     /**
+     * Récupérer la liste des playlists.
+     * @param {number} ownerId - L'ID du propriétaire (optionnel).
+     * @returns {Promise<Array>} - La liste des playlists.
+     */
+    static async findAll(ownerId = null) {
+        try {
+            let query = 'SELECT id, name, owner_id FROM playlists';
+            const params = [];
+
+            if (ownerId) {
+                query += ' WHERE owner_id = ?';
+                params.push(ownerId);
+            }
+
+            const [playlists] = await db.query(query, params);
+            return playlists;
+        } catch (error) {
+            console.error('Erreur dans le modèle Playlist:', error);
+            throw error;
+        }
+    }
+
+    /**
      * Récupérer une playlist par son ID.
      * @param {number} id - L'ID de la playlist.
      * @returns {Promise} - La playlist.

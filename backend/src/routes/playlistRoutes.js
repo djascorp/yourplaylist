@@ -8,6 +8,9 @@ const router = express.Router();
 // Create a new playlist
 router.post('/', authMiddleware, playlistController.createPlaylist);
 
+// Récupérer la liste des playlists
+router.get('/', authMiddleware, playlistController.getPlaylists);
+
 // Get a playlist by ID
 router.get('/:id', authMiddleware, playlistController.getPlaylist);
 

@@ -26,6 +26,23 @@ exports.createPlaylist = async (req, res) => {
 };
 
 /**
+ * Récupérer la liste des playlists.
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ */
+exports.getPlaylists = async (req, res) => {
+    const { ownerId } = req.query; // Optionnel : filtrer par propriétaire
+
+    try {
+        const playlists = await Playlist.findAll(ownerId);
+        res.status(200).json(playlists);
+    } catch (error) {
+        console.error('Erreur dans le contrôleur Playlist:', error);
+        res.status(500).json({ message: 'Erreur interne du serveur.' });
+    }
+};
+
+/**
  * Récupérer une playlist par son ID.
  * @param {Object} req - La requête HTTP.
  * @param {Object} res - La réponse HTTP.
