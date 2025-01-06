@@ -20,9 +20,11 @@ const authenticate = async (req, res, next) => {
             return res.status(401).json({ message: 'Access denied. No token provided.' });
         }
 
+        console.log("TOKEN", token);
+
         // Vérifier et décoder le token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+        console.log('DECODED TOKEN', decoded);
         // Vérifier si l'utilisateur existe dans la base de données
         const [user] = await db.query('SELECT id, username FROM users WHERE id = ?', [decoded.id]);
 

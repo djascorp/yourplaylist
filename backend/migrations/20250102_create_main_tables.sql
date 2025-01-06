@@ -3,7 +3,7 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,          -- Identifiant unique de l'utilisateur
     username VARCHAR(50) NOT NULL UNIQUE,       -- Nom d'utilisateur
     email VARCHAR(100) NOT NULL UNIQUE,         -- Adresse email
-    password_hash VARCHAR(255) NOT NULL,        -- Mot de passe hashé
+    password VARCHAR(255) NOT NULL,        -- Mot de passe hashé
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Date de création du compte
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Date de mise à jour
 );

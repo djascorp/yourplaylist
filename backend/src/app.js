@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const playlistRoutes = require('./routes/playlistRoutes');
 const trackRoutes = require('./routes/trackRoutes');
-// const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Initialize Express app
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.json()); // Parse JSON bodies
 // Routes
 app.use('/api/playlists', playlistRoutes); // Playlist routes
 app.use('/api/tracks', trackRoutes); // Track routes
-// app.use('/api/auth', authRoutes); // Authentication routes
+app.use('/api/auth', authRoutes); // Authentication routes
 
 // Default route
 app.get('/', (req, res) => {
