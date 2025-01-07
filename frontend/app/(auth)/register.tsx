@@ -49,7 +49,7 @@ export default function RegisterScreen() {
             login(response.token);
 
             // Rediriger l'utilisateur vers l'écran d'accueil ou le tableau de bord
-            router.replace("/");
+            router.replace("/playlists");
         } catch (error) {
             // Afficher une alerte en cas d'erreur
             Alert.alert("Error", error.message || "Failed to register. Please try again.");

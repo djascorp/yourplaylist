@@ -4,6 +4,7 @@ import { Alert } from "react-native"; // Pour afficher des alertes
 import { httpService as db } from "@/services/httpService"  // Importez le service HTTP
 import { Link, useRouter } from "expo-router";
 import { useApp } from "@/hooks/useApp";
+import { useToastController } from "@tamagui/toast";
 
 export default function LoginScreen() {
     const router = useRouter()
@@ -13,6 +14,7 @@ export default function LoginScreen() {
     });
     const [loading, setLoading] = useState(false); // Pour gérer l'état de chargement
     const { login } = useApp();
+    const toast = useToastController();
 
     /**
      * Gère la soumission du formulaire de connexion.
@@ -20,12 +22,12 @@ export default function LoginScreen() {
     const handleLogin = async () => {
         // Validation de base
         if (!form.email || !form.password) {
-            Alert.alert("Error", "Please fill in all fields.");
+            toast.show("Error", {message: "Please fill in all fields."});
             return;
         }
 
         if (!/\S+@\S+\.\S+/.test(form.email)) {
-            Alert.alert("Error", "Please enter a valid email address.");
+            toast.show("Error", {message: "Please enter a valid email address."});
             return;
         }
 
@@ -42,10 +44,11 @@ export default function LoginScreen() {
             login(response.token);
 
             // Rediriger l'utilisateur vers l'écran d'accueil ou le tableau de bord
-            router.replace('/');
+            router.replace('/playlists');
         } catch (error) {
             // Afficher une alerte en cas d'erreur
-            Alert.alert("Error", error.message || "Failed to log in. Please try again.");
+            toast.show("Error",{message: error.message || "Failed to log in. Please try again."});
+            
             console.log("ERROR",error)
         } finally {
             setLoading(false);

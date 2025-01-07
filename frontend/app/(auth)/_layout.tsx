@@ -1,14 +1,16 @@
-import { Stack } from 'expo-router';
+import { useApp } from '@/hooks/useApp';
+import { Redirect, Stack } from 'expo-router';
 import { useEffect, useRef } from 'react';
 
 export default function AuthLayout() {
-    const count = useRef(0);
+    const { logged } = useApp();
 
-    useEffect(() => {
-        count.current = count.current + 1;
+    if (logged) {
+        return (
+            <Redirect href="/playlists" />
+        )
+    }
 
-        console.log("AUTH LOADED", count.current);
-    });
     return (
         <Stack>
             <Stack.Screen name="login" options={{ title: 'Login' }} />
