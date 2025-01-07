@@ -3,6 +3,7 @@ import { Button, Form, Input, Label, Text, View, YStack } from "tamagui";
 import { Alert } from "react-native"; // Pour afficher des alertes
 import { httpService as db } from "@/services/httpService"  // Importez le service HTTP
 import { Link, useRouter } from "expo-router";
+import { useApp } from "@/hooks/useApp";
 
 export default function LoginScreen() {
     const router = useRouter()
@@ -11,6 +12,7 @@ export default function LoginScreen() {
         password: '',
     });
     const [loading, setLoading] = useState(false); // Pour gérer l'état de chargement
+    const { login } = useApp();
 
     /**
      * Gère la soumission du formulaire de connexion.
@@ -31,26 +33,27 @@ export default function LoginScreen() {
 
         try {
             // Appel à la fonction de connexion via le service HTTP
-            const user = await db.user.login({
+            const response = await db.user.login({
                 email: form.email,
                 password: form.password,
             });
 
             // Si la connexion réussit, connectez l'utilisateur via le contexte d'authentification
-            // login(user);
+            login(response.token);
 
             // Rediriger l'utilisateur vers l'écran d'accueil ou le tableau de bord
             router.replace('/');
         } catch (error) {
             // Afficher une alerte en cas d'erreur
             Alert.alert("Error", error.message || "Failed to log in. Please try again.");
+            console.log("ERROR",error)
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <View alignItems="center" justifyContent="center" flex={1} padding="$4">
+        <View alignItems="center" justifyContent="center" flex={1} padding="$4" paddingBottom="$12">
             <Form width={250} onSubmit={handleLogin}>
                 <YStack space="$2" alignItems="center">
                     <Label size="$9" marginBottom="$4">YourPlaylist</Label>

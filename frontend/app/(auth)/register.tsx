@@ -3,6 +3,7 @@ import { Button, Form, Input, Label, Text, View, YStack } from "tamagui";
 import { Alert } from "react-native"; // Pour afficher des alertes
 import { httpService } from "../../services/httpService"; // Importez le service HTTP
 import { Link, useRouter } from "expo-router";
+import { useApp } from "@/hooks/useApp";
 
 export default function RegisterScreen() {
     const router = useRouter();
@@ -12,6 +13,7 @@ export default function RegisterScreen() {
         password: '',
     });
     const [loading, setLoading] = useState(false); // Pour gérer l'état de chargement
+    const { login } = useApp();
 
     /**
      * Gère la soumission du formulaire d'inscription.
@@ -37,15 +39,14 @@ export default function RegisterScreen() {
 
         try {
             // Appel à la fonction d'inscription via le service HTTP
-            const user = await httpService.user.register({
+            const response = await httpService.user.register({
                 username: form.username,
                 email: form.email,
                 password: form.password,
             });
 
             // Si l'inscription réussit, connectez l'utilisateur via le contexte d'authentification
-            // const { login } = useAuth();
-            // login(user);
+            login(response.token);
 
             // Rediriger l'utilisateur vers l'écran d'accueil ou le tableau de bord
             router.replace("/");
