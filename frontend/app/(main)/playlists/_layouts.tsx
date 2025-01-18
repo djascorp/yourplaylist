@@ -5,7 +5,6 @@ export default function PlaylistLayout() {
         <Stack >
             <Stack.Screen name="playlist/index" options={{ title: 'Mes Playlists ' }} />
             <Stack.Screen name="playlist/[id]" options={{ title: 'Détails de la Playlist' }} />
-            <Stack.Screen name="playlist/create" options={{ title: 'Créer une Playlist' }} />
         </Stack>
     );
 }

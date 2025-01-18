@@ -87,13 +87,16 @@ export default function Playlists() {
                     data={playlists}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
+
                         <View padding={"$1"}>
-                            <Card hoverTheme bordered onPress={() => navigateToPlaylist(item.id)}>
-                                <Card.Header>
-                                    <H5>{item.name}</H5>
-                                    <Paragraph>{item.username}</Paragraph>
-                                </Card.Header>
-                            </Card>
+                            <TouchableOpacity onPress={() => navigateToPlaylist(item.id)}>
+                                <Card hoverTheme bordered>
+                                    <Card.Header>
+                                        <H5>{item.name}</H5>
+                                        <Paragraph>{item.username}</Paragraph>
+                                    </Card.Header>
+                                </Card>
+                            </TouchableOpacity>
                         </View>
                     )}
                 />
