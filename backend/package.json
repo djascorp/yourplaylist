@@ -19,6 +19,7 @@
     "google-auth-library": "^9.15.0",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.12.0",
+    "redis": "^4.7.0",
     "yt-stream": "^1.7.4"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 const ytStream = require('yt-stream');
 const Track = require('../models/Track');
 const logger = require('../utils/logger');
+const redisClient = require('../utils/redisClient');
 
 /**
  * Stream audio from a YouTube URL.
@@ -10,15 +11,44 @@ const logger = require('../utils/logger');
 exports.streamAudio = async (req, res) => {
     const youtubeUrl = req.query.url;
 
-    console.log("GET STREAM")
+    // Générer une clé unique pour le cache basée sur l'URL
+    const cacheKey = `audio:${youtubeUrl}`;
+
     try {
+        // Vérifier si l'audio est déjà en cache dans Redis
+        const cachedAudio = await redisClient.get(cacheKey);
+
+        if (cachedAudio) {
+            console.log("Serving from Redis cache");
+            res.header('Content-Type', 'audio/mpeg');
+
+            // Convertir les données base64 en buffer et les envoyer
+            const audioBuffer = Buffer.from(cachedAudio, 'base64');
+            return res.send(audioBuffer);
+        }
+
+        console.log("GET STREAM");
         // Get audio stream from YouTube URL
         const stream = await ytStream.stream(youtubeUrl, { audioOnly: true });
 
-        // Set response headers
-        res.header('Content-Type', 'audio/mpeg');
+        // Collecter les données du flux dans un buffer pour les mettre en cache
+        let audioData = [];
+        stream.stream.on('data', (chunk) => {
+            audioData.push(chunk);
+        });
 
-        // Stream the audio
+        stream.stream.on('end', async () => {
+            // Convertir les données en un seul buffer
+            const audioBuffer = Buffer.concat(audioData);
+
+            // Mettre en cache le buffer audio dans Redis (en base64)
+            await redisClient.set(cacheKey, audioBuffer.toString('base64'), {
+                EX: 3600 * 3, // Durée de vie du cache : 3 heure (en secondes)
+            });
+        });
+
+        // Streamer l'audio en temps réel vers le client
+        res.header('Content-Type', 'audio/mpeg');
         stream.stream.pipe(res)
             .on('error', (error) => {
                 logger.error('Error streaming audio:', error);
