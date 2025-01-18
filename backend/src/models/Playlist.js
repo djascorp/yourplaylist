@@ -21,7 +21,7 @@ class Playlist {
      */
     static async findAll(ownerId = null) {
         try {
-            let query = 'SELECT id, name, owner_id FROM playlists';
+            let query = 'SELECT playlists.*, users.username FROM playlists left join users on users.id = playlists.owner_id';
             const params = [];
 
             if (ownerId) {
@@ -43,7 +43,7 @@ class Playlist {
      * @returns {Promise} - La playlist.
      */
     static async findById(id) {
-        const [rows] = await db.query('SELECT * FROM playlists WHERE id = ?', [id]);
+        const [rows] = await db.query('SELECT playlists.*, users.username FROM playlists left join users on users.id = playlists.owner_id WHERE playlists.id = ?', [id]);
         return rows[0];
     }
 

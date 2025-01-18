@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { TamaguiProvider, Theme, YStack } from "tamagui";
+import { TamaguiProvider, Theme, View, YStack } from "tamagui";
 import config from "@/tamagui.config";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
@@ -46,7 +46,7 @@ export default function RootLayout() {
     <TamaguiProvider config={config} defaultTheme={colorScheme!}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <ToastProvider>
-          <Stack  />
+            <Stack screenOptions={{ headerShown: false }} />
           <ToastViewport flexDirection="column-reverse" top={2} right={2} />
           <CurrentToast />
         </ToastProvider>

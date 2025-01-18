@@ -3,6 +3,29 @@ const Track = require('../models/Track');
 const logger = require('../utils/logger');
 const redisClient = require('../utils/redisClient');
 
+// Fonction pour générer un nombre aléatoire de 5 chiffres
+function randomDigit(length) {
+    return Math.floor(Math.random() * Math.pow(10, length)).toString().padStart(length, '0');
+}
+
+// Fonction pour ajouter un argument aléatoire à l'URL
+function addRandomParameter(youtubeUrl) {
+    try {
+        // Crée un objet URL à partir de l'URL fournie
+        const url = new URL(youtubeUrl);
+
+        // Ajoute un paramètre aléatoire (x=12345)
+        url.searchParams.set('xx', randomDigit(5));
+
+        // Retourne l'URL modifiée
+        return url.toString();
+    } catch (error) {
+        // En cas d'erreur (par exemple, si l'URL est invalide), retourne l'URL d'origine
+        console.error('Invalid URL:', error);
+        return youtubeUrl;
+    }
+}
+
 /**
  * Stream audio from a YouTube URL.
  * @param {Object} req - The request object.
@@ -29,7 +52,7 @@ exports.streamAudio = async (req, res) => {
 
         console.log("GET STREAM");
         // Get audio stream from YouTube URL
-        const stream = await ytStream.stream(youtubeUrl, { audioOnly: true });
+        const stream = await ytStream.stream(addRandomParameter(youtubeUrl), { audioOnly: true });
 
         // Collecter les données du flux dans un buffer pour les mettre en cache
         let audioData = [];
@@ -110,7 +133,7 @@ exports.getTracksByPlaylist = async (req, res) => {
  * @param {Object} res - The response object.
  */
 exports.deleteTrack = async (req, res) => {
-    const { trackId : id } = req.params;
+    const { trackId: id } = req.params;
 
     try {
         const result = await Track.deleteById(id);

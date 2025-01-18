@@ -17,6 +17,7 @@ export const useApp = () => {
         const decoded = jwtDecode(token);
         console.log("DECODED", decoded);
         setUserInfo(decoded);
+        Secure
     }
     const logout = () => {
         setLogged(false);

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Form, Input, Label, Text, View, YStack } from "tamagui";
-import { Alert } from "react-native"; // Pour afficher des alertes
 import { httpService as db } from "@/services/httpService"  // Importez le service HTTP
 import { Link, useRouter } from "expo-router";
 import { useApp } from "@/hooks/useApp";

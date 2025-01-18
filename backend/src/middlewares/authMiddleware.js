@@ -9,7 +9,8 @@ const authenticate = async (req, res, next) => {
     try {
         // Récupérer le token de l'en-tête Authorization
         const token = req.header('Authorization')?.replace('Bearer ', '');
-
+        console.log("TOKEN",token);
+        
         if (AUTHORIZE_GUEST && !token) {
             // Si l'option AUTHORIZE_GUEST est activée et qu'il n'y a pas de token, utiliser l'utilisateur "Visiteur"
             req.user = { id: 1 };

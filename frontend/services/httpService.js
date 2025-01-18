@@ -65,7 +65,7 @@ export const httpService = {
 
         /**
          * Récupère les détails d'une playlist spécifique.
-         * @param {string} playlistId - L'ID de la playlist.
+         * @param {number} playlistId - L'ID de la playlist.
          * @returns {Promise} - Les détails de la playlist.
          */
         getById: async (playlistId) => {
@@ -84,7 +84,7 @@ export const httpService = {
 
         /**
          * Met à jour une playlist existante.
-         * @param {string} playlistId - L'ID de la playlist.
+         * @param {number} playlistId - L'ID de la playlist.
          * @param {Object} data - Les nouvelles données de la playlist.
          * @param {string} data.name - Le nouveau nom de la playlist.
          * @returns {Promise} - Les données mises à jour de la playlist.
@@ -95,7 +95,7 @@ export const httpService = {
 
         /**
          * Supprime une playlist.
-         * @param {string} playlistId - L'ID de la playlist.
+         * @param {number} playlistId - L'ID de la playlist.
          * @returns {Promise} - Un message de succès.
          */
         delete: async (playlistId) => {
@@ -104,11 +104,10 @@ export const httpService = {
 
         /**
          * Ajoute une piste à une playlist.
-         * @param {string} playlistId - L'ID de la playlist.
+         * @param {number} playlistId - L'ID de la playlist.
          * @param {Object} trackData - Les données de la piste.
          * @param {string} trackData.youtubeUrl - Le lien YouTube de la piste.
          * @param {string} trackData.title - Le titre de la piste.
-         * @param {number} trackData.duration - La durée de la piste.
          * @returns {Promise} - Les données de la piste ajoutée.
          */
         addTrack: async (playlistId, trackData = {}) => {
@@ -117,13 +116,21 @@ export const httpService = {
 
         /**
          * Supprime une piste d'une playlist.
-         * @param {string} playlistId - L'ID de la playlist.
+         * @param {number} playlistId - L'ID de la playlist.
          * @param {string} trackId - L'ID de la piste.
          * @returns {Promise} - Un message de succès.
          */
         removeTrack: async (playlistId, trackId) => {
             return await http.delete(`api/playlists/${playlistId}/tracks/${trackId}`);
         },
+
+        /**
+         * Recuperer la liste des tracks dans un playlist
+         * @param {number} playlistId - L'ID de la playlist.
+         */
+        getTracks :async (playlistId) => {
+            return await http.get(`api/playlists/${playlistId}/tracks`);
+        }
     },
 
     track: {
