@@ -28,11 +28,12 @@ const encodeQueryParams = (params) => {
 };
 
 export const http = {
+    BASE_URL: BASE_URL,
     /**
      * Effectue une requête POST.
      * @param {string} url - L'URL de l'endpoint.
-     * @param {Object} data - Les données à envoyer.
-     * @param {Object} headers - Les headers personnalisés.
+     * @param {Object?} data - Les données à envoyer.
+     * @param {Object?} headers - Les headers personnalisés.
      * @returns {Promise} - Les données JSON de la réponse.
      */
     post: async (url, data, headers = {}) => {
@@ -47,8 +48,8 @@ export const http = {
     /**
      * Effectue une requête GET.
      * @param {string} url - L'URL de l'endpoint.
-     * @param {Object} params - Les paramètres de requête.
-     * @param {Object} headers - Les headers personnalisés.
+     * @param {Object?} params - Les paramètres de requête.
+     * @param {Object?} headers - Les headers personnalisés.
      * @returns {Promise} - Les données JSON de la réponse.
      */
     get: async (url, params = {}, headers = {}) => {
@@ -106,3 +107,4 @@ export const http = {
         return handleResponse(response);
     },
 };
+

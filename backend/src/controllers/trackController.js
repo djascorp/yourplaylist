@@ -100,10 +100,12 @@ exports.streamAudioFromTrackId = async (req, res) => {
         const track = await Track.findById(trackId);
 
         if (!track) {
-            return res.status(404).json({ message: 'Track not found.' });
+            return res.s*tatus(404).json({ message: 'Track not found.' });
         }
 
-        const youtubeUrl = track.youtubeUrl;
+        console.log("TRACK",track)
+
+        const youtubeUrl = track.youtube_url;
 
         // Utiliser le service de streaming
         await doStreaming(youtubeUrl, res);

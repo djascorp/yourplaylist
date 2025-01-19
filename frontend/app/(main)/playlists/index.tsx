@@ -14,6 +14,12 @@ export interface Playlist {
     username?: string,
 }
 
+const CreatePlaylistBtn = ({ creating, createPlaylist }: { creating: boolean, createPlaylist: () => void }) => {
+    return (
+        <Button size={"$3"} icon={creating ? Spinner : ListPlus} variant='outlined' onPress={createPlaylist} disabled={creating} />
+    )
+}
+
 export default function Playlists() {
     const router = useRouter();
     const [playlists, setPlaylists] = useState<Playlist[]>([]);
@@ -41,7 +47,7 @@ export default function Playlists() {
 
     const [playlistName, setPlaylistName] = useState("");
     const [position, setPosition] = React.useState(0);
-    const [creating, setCreating] = React.useState(false);
+    const creating = React.useRef(false);
     const [openNewPlaylist, setOpenNewPlaylist] = React.useState(false);
     const newPlaylist = () => {
         setOpenNewPlaylist(true);
@@ -49,7 +55,9 @@ export default function Playlists() {
 
     const createPlaylist = async () => {
         try {
-            setCreating(true);
+            if (creating.current) return; // Évite les appels multiples
+            creating.current = true;
+
             const response = await db.playlist.create({
                 name: playlistName,
             });
@@ -59,13 +67,15 @@ export default function Playlists() {
             fetchPlaylists()
         } catch (error) {
             toast.show("Erreur", { message: (error as { message: string }).message })
+        } finally {
+            creating.current = false;
         }
-        setCreating(false);
     }
 
 
     // Charger les playlists depuis l'API
     useEffect(() => {
+        console.log("RENDER PLAYLIST/INDEX")
         fetchPlaylists();
     }, []);
 
@@ -77,6 +87,7 @@ export default function Playlists() {
             </View>
         );
     }
+
 
     return (
         <>
@@ -127,8 +138,7 @@ export default function Playlists() {
                 <Sheet.Frame padding="$4" justifyContent="center" alignItems="center" gap="$5">
                     <XStack gap={"$2"}>
                         <Input size={"$3"} placeholder='Nom du playlist' onChangeText={text => setPlaylistName(text)} value={playlistName}></Input>
-                        <Button size={"$3"} icon={creating ? Spinner : ListPlus} variant='outlined' onPress={createPlaylist} disabled={creating}>
-                        </Button>
+                        <CreatePlaylistBtn creating={creating.current} createPlaylist={createPlaylist} />
                     </XStack>
                 </Sheet.Frame>
             </Sheet>

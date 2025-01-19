@@ -10,4 +10,7 @@ router.delete('/:trackId', authMiddleware, trackController.deleteTrack);
 // Stream audio from a YouTube URL
 router.get('/stream',authMiddleware, trackController.streamAudio);
 
+// Stream audio from a YouTube URL
+router.get('/streamByTrack/:trackId',authMiddleware, trackController.streamAudioFromTrackId);
+
 module.exports = router;

@@ -15,6 +15,16 @@ class Track {
     }
 
     /**
+     * Find a track by ID.
+     * @param {number} id - The ID of the track.
+     * @returns {Promise} - The track data.
+     */
+    static async findById(id) {
+        const [rows] = await db.query('SELECT * FROM tracks WHERE id = ?', [id]);
+        return rows[0]; // Retourne le premier résultat (ou undefined si non trouvé)
+    }
+
+    /**
      * Find tracks by playlist ID.
      * @param {number} playlistId - The ID of the playlist.
      * @returns {Promise} - The list of tracks.

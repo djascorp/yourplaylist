@@ -1,7 +1,7 @@
 import { FlatList } from 'react-native';
 import { ListItem, View, YStack } from 'tamagui';
-import { MusicPlayer } from './MusicPlayer';
 import { Ellipsis, Music } from '@tamagui/lucide-icons';
+import React, { Children } from 'react';
 
 interface Track {
   id: number;
@@ -10,23 +10,39 @@ interface Track {
   duration: number;
 }
 
-const renderTrackItem = ({ item }: { item: Track }) => {
-  return <ListItem title={item.title} icon={Music} hoverTheme iconAfter={Ellipsis} />;
+const TrackItem = ({ item, active, onPressTrack }: { item: Track, active: boolean, onPressTrack?: CallableFunction }) => {
+
+  const onClickItem = () => {
+    if (onPressTrack) {
+      onPressTrack(item);
+    }
+  }
+
+  return (
+    <ListItem
+      title={item.title}
+      icon={Music}
+      iconAfter={(props) => <Ellipsis  {...props} />}
+      onPress={onClickItem}
+      hoverTheme
+      pressTheme
+      active={active}
+    />
+  );
 };
 
-export const MusicList = ({ tracks }: {tracks: Track[]}) => {
-  
+export const MusicList = ({ tracks, onPressTrack, children, active }: { tracks: Track[], onPressTrack?: CallableFunction, children?: React.ReactNode, active?: number }) => {
 
   return (
     <YStack flex={1} padding={"$2"}>
       <View flex={1}>
         <FlatList
           data={tracks}
-          renderItem={renderTrackItem}
+          renderItem={({ item }) => <TrackItem item={item} onPressTrack={onPressTrack} active={active == item.id} />}
           keyExtractor={(item) => String(item.id)}
         />
       </View>
-      <MusicPlayer />
+      {children}
     </YStack>
   );
 };
