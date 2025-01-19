@@ -116,7 +116,6 @@ export default function Playlists() {
                 animation="medium"
                 position={position}
                 onPositionChange={setPosition}
-                snapPoints={[80]}
             >
                 <Sheet.Overlay
                     animation="lazy"

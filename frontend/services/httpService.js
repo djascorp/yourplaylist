@@ -106,8 +106,7 @@ export const httpService = {
          * Ajoute une piste à une playlist.
          * @param {number} playlistId - L'ID de la playlist.
          * @param {Object} trackData - Les données de la piste.
-         * @param {string} trackData.youtubeUrl - Le lien YouTube de la piste.
-         * @param {string} trackData.title - Le titre de la piste.
+         * @param {string} trackData.youtube_url - Le lien YouTube de la piste.
          * @returns {Promise} - Les données de la piste ajoutée.
          */
         addTrack: async (playlistId, trackData = {}) => {

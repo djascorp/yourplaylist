@@ -1,4 +1,5 @@
 const Playlist = require('../models/Playlist');
+const { getYouTubeTrackInfo } = require('../services/youtubeService');
 
 /**
  * Créer une nouvelle playlist.
@@ -73,19 +74,24 @@ exports.getPlaylist = async (req, res) => {
  */
 exports.addTrackToPlaylist = async (req, res) => {
     try {
-        const { youtube_url, title, duration } = req.body;
+        const { youtube_url } = req.body; // On ne récupère que l'URL YouTube
         const playlistId = req.params.id;
         const addedBy = req.user.id; // L'ID de l'utilisateur est extrait du token JWT
 
-        // Vérifier si tous les champs sont fournis
-        if (!youtube_url || !title || !duration) {
-            return res.status(400).json({ message: 'All fields are required.' });
+        // Vérifier si l'URL YouTube est fournie
+        if (!youtube_url) {
+            return res.status(400).json({ message: 'YouTube URL est requis!' });
         }
+
+        // Charger les informations de la musique depuis YouTube
+        const { title, duration } = await getYouTubeTrackInfo(youtube_url);
+
+        console.log("INFO", title, duration);
 
         // Vérifier si la playlist existe
         const playlist = await Playlist.findById(playlistId);
         if (!playlist) {
-            return res.status(404).json({ message: 'Playlist not found.' });
+            return res.status(404).json({ message: 'Playlist Introuvable.' });
         }
 
         // Ajouter la piste à la playlist

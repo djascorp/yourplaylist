@@ -1,3 +1,4 @@
+import { AddTrackBtn } from "@/components/AddTrackBtn";
 import { useApp } from "@/hooks/useApp";
 import { Redirect, Stack } from "expo-router";
 
@@ -11,6 +12,6 @@ export default function MainLayout(){
     }
 
     return (
-        <Stack />
+        <Stack screenOptions={{headerShown : false}}/>
     )
 }
