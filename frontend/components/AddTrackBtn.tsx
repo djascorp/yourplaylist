@@ -46,6 +46,7 @@ export const AddTrackBtn = ({ playlistId, onTrackAdded }: { playlistId: number, 
                 onPositionChange={setPosition}
                 animation={"medium"}
                 zIndex={100_000}
+                modal
             >
                 <Sheet.Overlay
                     animation="lazy"

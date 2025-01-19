@@ -1,6 +1,6 @@
 import { Button, Label, ListItem, Slider, View, XStack, YStack } from "tamagui";
 import { Music2, Pause, SkipBack, SkipForward } from "@tamagui/lucide-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface MusicPlayerProps {
     currentTime: number,
@@ -42,6 +42,11 @@ export const MusicPlayer = () => {
         duration: 4.5,
         title: "Hello World"
     })
+
+    useEffect(() => {
+        console.log("RENDER PLAYER");
+    },[])
+
     return (
         <YStack gap="$2" padding={"$2"}>
             <XStack gap="$3" alignSelf="center">

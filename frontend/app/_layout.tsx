@@ -46,7 +46,7 @@ export default function RootLayout() {
     <TamaguiProvider config={config} defaultTheme={colorScheme!}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <ToastProvider>
-            <Stack screenOptions={{ headerShown: false }} />
+          <Stack screenOptions={{ headerShown: false }} />
           <ToastViewport flexDirection="column-reverse" top={4} right={2} />
           <CurrentToast />
         </ToastProvider>

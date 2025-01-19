@@ -1,6 +1,6 @@
 import { Button, YStack, View, Text } from "tamagui";
-import { MusicList } from "@/components/MusicList";
 import { useToastController } from "@tamagui/toast";
+import { Link } from "expo-router";
 
 export default function Index() {
   const toast = useToastController()
@@ -12,15 +12,19 @@ export default function Index() {
   }
 
   return (
-    <YStack flex={1}>
-      <MusicList />
-      {/* <Link href={"/test"} >
+    <YStack flex={1} gap={"$2"}>
+      {/* <MusicList /> */}
+      <Link href={"/playlists"} replace>
+        <Button  width={"100%"}>Playlist</Button>
+      </Link>
+
+      <Link href={"/test"} >
         <Button  width={"100%"}>Player Test</Button>
       </Link>
 
       <Link href={"/login"} replace={true} >
         <Button width={"100%"}>Login</Button>
-      </Link> */}
+      </Link>
 
     </YStack>
   );

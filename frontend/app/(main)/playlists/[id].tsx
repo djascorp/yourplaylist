@@ -5,6 +5,7 @@ import { httpService as db } from '@/services/httpService';
 import { AddTrackBtn } from '@/components/AddTrackBtn';
 import { View, Text } from 'tamagui';
 import { useRefresh } from '@/hooks/useRefresh';
+import MusicList from '@/components/MusicList';
 
 export interface Track {
     id: number,
@@ -27,9 +28,7 @@ export default function PlaylistDetail() {
 
     const fetchTracks = async () => {
         try {
-
             const data = await db.playlist.getTracks(Number(id));
-
             setTracks(data);
         } catch (error) {
             console.error('Error fetching playlist:', error);
@@ -56,16 +55,7 @@ export default function PlaylistDetail() {
 
     return (
         <View style={{ flex: 1, padding: 16 }}>
-            <FlatList
-                data={tracks}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <View style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
-                        <Text style={{ fontSize: 18 }}>{item.title}</Text>
-                        <Text style={{ color: '#666' }}>{item.youtube_url}</Text>
-                    </View>
-                )}
-            />
+            <MusicList tracks={tracks}/>
         </View>
     );
 }
