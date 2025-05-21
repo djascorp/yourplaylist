@@ -1,5 +1,5 @@
 import { FlatList } from 'react-native';
-import { ListItem, View, YStack } from 'tamagui';
+import { ListItem, View, YStack, Square } from 'tamagui';
 import { Ellipsis, Music } from '@tamagui/lucide-icons';
 import React, { Children } from 'react';
 
@@ -10,7 +10,7 @@ interface Track {
   duration: number;
 }
 
-const TrackItem = ({ item, active, onPressTrack }: { item: Track, active: boolean, onPressTrack?: CallableFunction }) => {
+const TrackItem = ({ item, active, onPressTrack }: { item: Track, active: boolean, onPressTrack?: (track: Track) => void }) => {
 
   const onClickItem = () => {
     if (onPressTrack) {
@@ -21,17 +21,22 @@ const TrackItem = ({ item, active, onPressTrack }: { item: Track, active: boolea
   return (
     <ListItem
       title={item.title}
-      icon={Music}
+      icon={
+        <Square size={40} backgroundColor="$gray8" borderRadius="$4" justifyContent="center" alignItems="center">
+          <Music size={24} color="$gray10" />
+        </Square>
+      }
       iconAfter={(props) => <Ellipsis  {...props} />}
       onPress={onClickItem}
       hoverTheme
       pressTheme
-      active={active}
+      animation="quick"
+      backgroundColor={active ? '$blue5' : '$background'}
     />
   );
 };
 
-export const MusicList = ({ tracks, onPressTrack, children, active }: { tracks: Track[], onPressTrack?: CallableFunction, children?: React.ReactNode, active?: number }) => {
+export const MusicList = ({ tracks, onPressTrack, children, active }: { tracks: Track[], onPressTrack?: (track: Track) => void, children?: React.ReactNode, active?: number }) => {
 
   return (
     <YStack flex={1} padding={"$2"}>

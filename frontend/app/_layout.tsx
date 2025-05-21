@@ -47,7 +47,7 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <ToastProvider>
           <Stack screenOptions={{ headerShown: false }} />
-          <ToastViewport flexDirection="column-reverse" top={4} right={2} />
+          <ToastViewport flexDirection="column-reverse" top="$1" right="$0.5" />
           <CurrentToast />
         </ToastProvider>
       </ThemeProvider>

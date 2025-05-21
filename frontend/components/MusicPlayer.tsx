@@ -8,6 +8,7 @@ export interface MusicSliderProps {
     currentTime: number,
     duration: number,
     title?: string,
+    author?: string, // New optional prop
 }
 
 
@@ -21,25 +22,33 @@ export const MusicSlider = ({ state , onMusicSlide}: { state: MusicSliderProps, 
     }
 
     return (
-        <XStack justifyContent="center" gap={"$2"} $sm={{ flexDirection: 'column-reverse', alignItems: 'center', gap: '0' }} backgroundColor="$background">
-            <View padding="$2">
-                <ListItem title={state.title} icon={Music2} />
+        <XStack justifyContent="center" gap={"$3"} $sm={{ flexDirection: 'column', alignItems: 'center', gap: '$2' }} backgroundColor="$background" width="100%">
+            <View padding="$2" flex={1} $sm={{ width: '100%'}}>
+                <ListItem 
+                    title={state.title} 
+                    subTitle={state.author} 
+                    icon={Music2} 
+                    animation="quick"
+                    enterStyle={{ opacity: 0 }}
+                    opacity={1}
+                />
             </View>
             <XStack
-                gap="$4"
+                gap="$3"
+                alignItems="center"
                 flex={1}
-                $sm={{ width: '100%' }} // Largeur maximale sur les petits écrans
+                $sm={{ width: '100%', paddingHorizontal: '$3' }} 
             >
-                <Label>{formaterDuree(state.currentTime)}</Label>
+                <Label minWidth={45} textAlign="center">{formaterDuree(state.currentTime)}</Label>
                 <View flex={1} justifyContent="center">
-                    <Slider value={[Math.round(state.currentTime)]} max={Math.round(state.duration)} step={1} orientation="horizontal" onValueChange={onSlide}>
+                    <Slider defaultValue={[0]} value={[Math.round(state.currentTime)]} max={Math.round(state.duration)} step={1} orientation="horizontal" onValueChange={onSlide}>
                         <Slider.Track>
-                            <Slider.TrackActive />
+                            <Slider.TrackActive backgroundColor="$blue9" />
                         </Slider.Track>
-                        <Slider.Thumb size="$1" index={0} circular />
+                        <Slider.Thumb size="$1.5" index={0} circular />
                     </Slider>
                 </View>
-                <Label>{formaterDuree(state.duration)}</Label>
+                <Label minWidth={45} textAlign="center">{formaterDuree(state.duration)}</Label>
             </XStack>
         </XStack>
     );
@@ -48,27 +57,36 @@ export const MusicSlider = ({ state , onMusicSlide}: { state: MusicSliderProps, 
 export interface MusicPlayerProps {
     status: AudioStatus, 
     title: string, 
-    onPrev: CallableFunction,
-    onNext: CallableFunction,
-    onPause: CallableFunction,
-    onPlay: CallableFunction,
+    author?: string, // Added author
+    onPrev: () => void,
+    onNext: () => void,
+    onPause: () => void,
+    onPlay: () => void,
     onSlide: (value:number) => void,
 }
-export const MusicPlayer = ({ status, title, onPrev, onNext, onPause, onPlay ,onSlide}: MusicPlayerProps) => {
+export const MusicPlayer = ({ status, title, author, onPrev, onNext, onPause, onPlay ,onSlide}: MusicPlayerProps) => {
 
     useEffect(() => {
-        console.log("RENDER PLAYER");
+        // console.log("RENDER PLAYER"); // Kept for dev purposes if needed
     }, [])
 
     return (
-        <YStack gap="$2" padding={"$2"}>
-            <XStack gap="$3" alignSelf="center">
-                <Button icon={SkipBack} size={"$3"} onPress={() => onPrev()} />
-                {status.playing && <Button icon={Pause} size={"$3"} onPress={() => onPause()} /> }
-                {!status.playing && <Button icon={Play} size={"$3"} onPress={() => onPlay()} /> }
-                <Button icon={SkipForward} size={"$3"} onPress={() => onNext()} />
+        <YStack gap="$3" padding={"$3"} alignItems="center" width="100%">
+            <XStack gap="$4" alignSelf="center">
+                <Button circular icon={SkipBack} size={"$4"} onPress={() => onPrev()} />
+                {status.playing && <Button circular icon={Pause} size={"$4"} onPress={() => onPause()} /> }
+                {!status.playing && <Button circular icon={Play} size={"$4"} onPress={() => onPlay()} /> }
+                <Button circular icon={SkipForward} size={"$4"} onPress={() => onNext()} />
             </XStack>
-            <MusicSlider state={{ currentTime: status.currentTime, duration: status.duration, title: title }} onMusicSlide={onSlide} />
+            <MusicSlider 
+                state={{ 
+                    currentTime: status.currentTime, 
+                    duration: status.duration, 
+                    title: title,
+                    author: author // Pass author to MusicSlider
+                }} 
+                onMusicSlide={onSlide} 
+            />
         </YStack>
     )
 }

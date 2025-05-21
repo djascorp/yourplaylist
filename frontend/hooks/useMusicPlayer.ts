@@ -10,14 +10,17 @@ export const useMusicPlayer = () => {
 
   const [currentTrack, setCurrentTrackAtom] = useAtom(currentTrackAtom);
   const setCurrentTrack = (track: Track) => {
-    setCurrentTrackAtom(currentTrack);
+    setCurrentTrackAtom(track);
 
+    // It's often a good practice to pause the player before replacing the source
+    // to prevent any potential issues with playback state or resource handling.
     if(player.playing){
       pause();
     }
     player.replace({
       uri: db.track.getUrl(String(track.id)),
     });
+    // Start playing the new track immediately
     play();
   };
 
