@@ -23,6 +23,14 @@ YourPlaylist is a collaborative playlist management web application. Create play
 
 ---
 
+## **Development Principles**
+This project adheres to the following core development principles:
+- **Architectural Separation**: Clear separation between frontend (React Native Expo) and backend (Node.js).
+- **Code Quality & Maintainability**: Commitment to established coding standards, documentation, and modular design.
+- **Test-Driven Development (TDD)**: Emphasis on automated testing (unit, integration, E2E) to ensure correctness and prevent regressions.
+
+---
+
 ## **Installation**
 
 1. **Clone the repository**:
@@ -57,6 +65,35 @@ YourPlaylist is a collaborative playlist management web application. Create play
 
 6. **Access the application**:
    Open your browser and go to `http://localhost:3000`.
+
+---
+
+## **TypeScript Development (Backend)**
+
+The backend is developed using TypeScript. Here's how to work with it:
+
+1.  **Build the TypeScript code**:
+    ```bash
+    npm run build --prefix backend
+    ```
+    This compiles the TypeScript files from `backend/src` into JavaScript files in `backend/dist`.
+
+2.  **Run the compiled application**:
+    ```bash
+    npm start --prefix backend
+    ```
+    This starts the application using the compiled JavaScript code.
+
+3.  **Run in development mode (with hot-reloading)**:
+    ```bash
+    npm run dev --prefix backend
+    ```
+    This uses `nodemon` and `ts-node` to automatically recompile and restart the server on code changes.
+
+4.  **Run tests**:
+    ```bash
+    npm test --prefix backend
+    ```
 
 ---
 

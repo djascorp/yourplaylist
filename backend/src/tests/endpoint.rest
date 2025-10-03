@@ -20,10 +20,10 @@ Content-Type: application/json
 ### Créer une nouvelle playlist
 POST http://localhost:3000/api/playlists
 Content-Type: application/json
-# Authorization: Bearer <your_jwt_token>
+Authorization: Bearer <your_jwt_token>
 
 {
-  "name": "My Playlist"
+  "name": "My Playlist 3"
 }
 
 ### Récupérer une playlist par ID
