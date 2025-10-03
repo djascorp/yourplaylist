@@ -4,8 +4,8 @@ import db from '../../src/config/db'; // Import db for cleanup
 
 describe('User Authentication and Management', () => {
   const testUser = {
-    username: 'testuser',
-    email: 'test@example.com',
+    username: 'usertestuser',
+    email: 'user@example.com',
     password: 'password123',
   };
 
@@ -17,7 +17,6 @@ describe('User Authentication and Management', () => {
   // Clean up database after all tests
   afterAll(async () => {
     await db.query('DELETE FROM users WHERE email = ?', [testUser.email]);
-    (db as any).end(); // Close the database connection pool
   });
 
   it('should register a new user', async () => {
