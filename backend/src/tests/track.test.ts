@@ -52,20 +52,23 @@ describe('Track Addition and Management', () => {
     playlistId = playlistRes.body.id;
   });
 
-  it('should attempt to add a track to a playlist', async () => {
+  it('should add a track to a playlist', async () => {
     const res = await request(app)
       .post(`/api/playlists/${playlistId}/tracks`)
       .set('Authorization', `Bearer ${token}`)
       .send({
         youtube_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       });
-    expect(res.statusCode).toEqual(500); // yt-stream may fail due to external issues
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('id');
+    expect(res.body).toHaveProperty('title');
+    trackId = res.body.id;
   });
 
-  it('should return 400 for deleting a non-existent track', async () => {
+  it('should remove a track from a playlist', async () => {
     const res = await request(app)
-      .delete(`/api/tracks/99999`)
+      .delete(`/api/tracks/${trackId}`)
       .set('Authorization', `Bearer ${token}`);
-    expect(res.statusCode).toEqual(404); // Since track doesn't exist
+    expect(res.statusCode).toEqual(204);
   });
 });

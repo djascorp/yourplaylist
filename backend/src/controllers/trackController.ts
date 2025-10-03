@@ -49,6 +49,12 @@ export const streamAudio = async (req: Request, res: Response) => {
     const audioStream = await getAudioStream(youtubeUrl);
     res.setHeader('Content-Type', 'audio/mpeg'); // Assuming MPEG audio
     audioStream.pipe(res);
+    audioStream.on('error', (err) => {
+      loggerError('Stream error:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: 'Stream error' });
+      }
+    });
   } catch (error: any) {
     loggerError(error.message);
     res.status(500).json({ message: error.message });
@@ -153,6 +159,12 @@ export const streamAudioFromTrackId = async (req: Request, res: Response) => {
     const audioStream = await getAudioStream(youtubeUrl);
     res.setHeader('Content-Type', 'audio/mpeg'); // Assuming MPEG audio
     audioStream.pipe(res);
+    audioStream.on('error', (err) => {
+      loggerError('Stream error:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: 'Stream error' });
+      }
+    });
   } catch (error: any) {
     loggerError(error.message);
     res.status(500).json({ message: error.message });

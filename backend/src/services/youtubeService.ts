@@ -1,4 +1,4 @@
-import * as ytStream from 'yt-stream';
+import ytdl from '@distube/ytdl-core';
 
 /**
  * Interface for the information retrieved from a YouTube track.
@@ -17,11 +17,11 @@ interface YouTubeTrackInfo {
  */
 async function getYouTubeTrackInfo(youtubeUrl: string): Promise<YouTubeTrackInfo> {
   try {
-    const info = await ytStream.getInfo(youtubeUrl);
+    const info = await ytdl.getInfo(youtubeUrl);
 
-    const title = info.title || 'Unknown Title';
-    const duration = parseInt(String(info.duration || '0'));
-    const author = info.author || 'Unknown Artist';
+    const title = info.videoDetails.title || 'Unknown Title';
+    const duration = parseInt(info.videoDetails.lengthSeconds || '0');
+    const author = info.videoDetails.author.name || 'Unknown Artist';
 
     return { title, duration, author };
   } catch (error) {

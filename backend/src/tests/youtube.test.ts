@@ -41,9 +41,10 @@ describe('YouTube Stream Integration', () => {
     const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // A valid YouTube URL
     const res = await request(app)
       .get(`/api/tracks/stream?url=${encodeURIComponent(youtubeUrl)}`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Authorization', `Bearer ${token}`)
+      .timeout(5000); // Short timeout for streaming test
     expect(res.statusCode).toEqual(500); // yt-stream may fail due to external issues
-  });
+  }, 10000);
 
   it('should return 400 for an invalid YouTube URL', async () => {
     const invalidUrl = 'https://not-youtube.com/invalid';

@@ -1,4 +1,4 @@
-import * as ytStream from 'yt-stream';
+import ytdl from '@distube/ytdl-core';
 import { Readable } from 'stream';
 
 /**
@@ -9,13 +9,10 @@ import { Readable } from 'stream';
  */
 async function getAudioStream(youtubeUrl: string): Promise<Readable> {
   try {
-    const info = await ytStream.getInfo(youtubeUrl);
-    const stream = await ytStream.stream(info, {
-      type: 'audio',
-      highWaterMark: 0,
-      quality: 'high',
-      download: false,
-    }) as unknown as Readable;
+    const stream = ytdl(youtubeUrl, {
+      filter: 'audioonly',
+      quality: 'lowestaudio',
+    });
     return stream;
   } catch (error) {
     console.error('Error getting audio stream:', error);
