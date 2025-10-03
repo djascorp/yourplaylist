@@ -68,6 +68,35 @@ This project adheres to the following core development principles:
 
 ---
 
+## **TypeScript Development (Backend)**
+
+The backend is developed using TypeScript. Here's how to work with it:
+
+1.  **Build the TypeScript code**:
+    ```bash
+    npm run build --prefix backend
+    ```
+    This compiles the TypeScript files from `backend/src` into JavaScript files in `backend/dist`.
+
+2.  **Run the compiled application**:
+    ```bash
+    npm start --prefix backend
+    ```
+    This starts the application using the compiled JavaScript code.
+
+3.  **Run in development mode (with hot-reloading)**:
+    ```bash
+    npm run dev --prefix backend
+    ```
+    This uses `nodemon` and `ts-node` to automatically recompile and restart the server on code changes.
+
+4.  **Run tests**:
+    ```bash
+    npm test --prefix backend
+    ```
+
+---
+
 ## **API Endpoints**
 
 ### **Playlists**

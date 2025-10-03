@@ -9,7 +9,9 @@ import playlistRoutes from './routes/playlistRoutes';
 import trackRoutes from './routes/trackRoutes';
 import authRoutes from './routes/authRoutes';
 
-// Initialize Express app
+/**
+ * Initializes the Express application.
+ */
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -27,9 +29,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to YouPlaylist! 🎶');
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// Start the server only if this file is run directly
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
 
 export default app;

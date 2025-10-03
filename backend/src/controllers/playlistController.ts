@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Playlist from '../models/Playlist'; // Assuming Playlist.ts is available
 import { getYouTubeTrackInfo } from '../services/youtubeService'; // Assuming youtubeService.ts is available
+import { UserRow } from '../middlewares/authMiddleware'; // Import UserRow
 
 interface CreatePlaylistRequestBody {
   name: string;
@@ -14,13 +15,15 @@ interface AddTrackToPlaylistRequestBody {
 declare global {
   namespace Express {
     interface Request {
-      user?: { id: number; username: string };
+      user?: UserRow; // Use UserRow here
     }
   }
 }
 
 /**
- * Create a new playlist.
+ * Handles the creation of a new playlist.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const createPlaylist = async (req: Request<{}, {}, CreatePlaylistRequestBody>, res: Response) => {
   try {
@@ -44,7 +47,9 @@ export const createPlaylist = async (req: Request<{}, {}, CreatePlaylistRequestB
 };
 
 /**
- * Get a list of playlists.
+ * Handles retrieving a list of playlists.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const getPlaylists = async (req: Request, res: Response) => {
   const ownerId = req.query.ownerId ? parseInt(req.query.ownerId as string) : null; // Optional: filter by owner
@@ -59,7 +64,9 @@ export const getPlaylists = async (req: Request, res: Response) => {
 };
 
 /**
- * Get a playlist by its ID.
+ * Handles retrieving a single playlist by its ID.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const getPlaylist = async (req: Request, res: Response) => {
   try {
@@ -78,7 +85,9 @@ export const getPlaylist = async (req: Request, res: Response) => {
 };
 
 /**
- * Add a track to a playlist.
+ * Handles adding a track to a playlist.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const addTrackToPlaylist = async (req: Request<{ id: string }, {}, AddTrackToPlaylistRequestBody>, res: Response) => {
   try {
@@ -110,7 +119,9 @@ export const addTrackToPlaylist = async (req: Request<{ id: string }, {}, AddTra
 };
 
 /**
- * Delete a playlist by its ID.
+ * Handles deleting a playlist by its ID.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const deletePlaylist = async (req: Request, res: Response) => {
   try {

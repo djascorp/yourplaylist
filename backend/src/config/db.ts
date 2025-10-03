@@ -1,5 +1,9 @@
 import mysql from 'mysql2/promise';
 
+/**
+ * Database connection pool configuration.
+ * Retrieves database credentials from environment variables.
+ */
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,

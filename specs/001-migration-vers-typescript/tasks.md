@@ -74,14 +74,14 @@
 - [X] T024 Migrate `backend/src/app.js` to `backend/src/app.ts`.
 
 ## Phase 3.4: Integration & Performance
-- [ ] T025 Implement caching mechanisms (e.g., Redis integration for API responses) in `backend/src/services/cacheService.ts`.
-- [ ] T026 Update frontend API calls to match any TypeScript-driven backend API changes in `frontend/src/services/httpService.ts` and `frontend/src/utils/http.js`.
-- [ ] T027 Verify all existing functionalities after migration and refactoring through manual and automated tests.
+- [X] T025 Implement caching mechanisms (e.g., Redis integration for API responses) in `backend/src/services/cacheService.ts`.
+- [X] T026 Update frontend API calls to match any TypeScript-driven backend API changes in `frontend/src/services/httpService.ts` and `frontend/src/utils/http.js`.
+- [X] T027 Verify all existing functionalities after migration and refactoring through manual and automated tests.
 
 ## Phase 3.5: Polish
-- [ ] T028 [P] Add JSDoc/TSDoc comments for new/refactored TypeScript code in `backend/src/**/*.ts`.
-- [ ] T029 Review and optimize backend code for 200 concurrent users.
-- [ ] T030 Update `README.md` with TypeScript development instructions and build process.
+- [X] T028 [P] Add JSDoc/TSDoc comments for new/refactored TypeScript code in `backend/src/**/*.ts`.
+- [X] T029 Review and optimize backend code for 200 concurrent users.
+- [X] T030 Update `README.md` with TypeScript development instructions and build process.
 
 ## Dependencies
 - T001-T004 must be completed before T005-T024.

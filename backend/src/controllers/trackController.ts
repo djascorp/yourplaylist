@@ -4,6 +4,9 @@ import Track from '../models/Track'; // Assuming Track.ts is available
 import { error as loggerError } from '../utils/logger'; // Assuming logger.ts is available
 import { getAudioStream } from '../services/streamService'; // Assuming streamService.ts is available
 
+/**
+ * Interface for the request body of the addTrack endpoint.
+ */
 interface AddTrackRequestBody {
   youtubeUrl: string;
   playlistId: number;
@@ -25,13 +28,21 @@ declare global {
 }
 
 /**
- * Stream audio from a YouTube URL.
+ * Handles streaming audio from a YouTube URL.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const streamAudio = async (req: Request, res: Response) => {
   const youtubeUrl = req.query.url;
 
-  if (!youtubeUrl) {
-    return res.status(400).json({ message: 'YouTube URL is required.' });
+  if (typeof youtubeUrl !== 'string') {
+    return res.status(400).json({ message: 'YouTube URL must be a string.' });
+  }
+
+  // Simple validation for YouTube URL
+  const youtubeRegex = /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/;
+  if (!youtubeRegex.test(youtubeUrl)) {
+    return res.status(400).json({ message: 'Invalid YouTube URL.' });
   }
 
   try {
@@ -45,7 +56,9 @@ export const streamAudio = async (req: Request, res: Response) => {
 };
 
 /**
- * Add a track to the database.
+ * Handles adding a track to the database.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const addTrack = async (req: Request<{}, {}, AddTrackRequestBody>, res: Response) => {
   const { youtubeUrl, playlistId } = req.body;
@@ -60,7 +73,7 @@ export const addTrack = async (req: Request<{}, {}, AddTrackRequestBody>, res: R
     const track = await Track.create({
       youtubeUrl,
       title: info.title || 'Unknown Title',
-      duration: parseInt(info.duration || '0'),
+      duration: parseInt(String(info.duration || '0')),
       playlistId,
     });
 
@@ -72,7 +85,9 @@ export const addTrack = async (req: Request<{}, {}, AddTrackRequestBody>, res: R
 };
 
 /**
- * Get all tracks in a playlist.
+ * Handles retrieving all tracks in a playlist.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const getTracksByPlaylist = async (req: Request, res: Response) => {
   const playlistId = req.params.playlistId ? parseInt(req.params.playlistId) : undefined;
@@ -91,7 +106,9 @@ export const getTracksByPlaylist = async (req: Request, res: Response) => {
 };
 
 /**
- * Delete a track by ID.
+ * Handles deleting a track by its ID.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const deleteTrack = async (req: Request, res: Response) => {
   const trackId = req.params.trackId ? parseInt(req.params.trackId) : undefined;
@@ -105,7 +122,7 @@ export const deleteTrack = async (req: Request, res: Response) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Track not found.' });
     }
-    res.status(200).json({ message: 'Track deleted successfully.' });
+    res.status(204).send();
   } catch (error: any) {
     loggerError('Error deleting track:', error);
     res.status(500).json({ message: 'Error deleting track.' });
@@ -113,7 +130,9 @@ export const deleteTrack = async (req: Request, res: Response) => {
 };
 
 /**
- * Stream audio from a track ID.
+ * Handles streaming audio from a track ID.
+ * @param req The Express request object.
+ * @param res The Express response object.
  */
 export const streamAudioFromTrackId = async (req: Request, res: Response) => {
   const trackId = req.params.trackId;
