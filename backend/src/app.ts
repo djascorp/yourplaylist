@@ -1,13 +1,13 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-const express = require('express');
-const cors = require('cors');
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 
-const playlistRoutes = require('./routes/playlistRoutes');
-const trackRoutes = require('./routes/trackRoutes');
-const authRoutes = require('./routes/authRoutes');
+import playlistRoutes from './routes/playlistRoutes';
+import trackRoutes from './routes/trackRoutes';
+import authRoutes from './routes/authRoutes';
 
 // Initialize Express app
 const app = express();
@@ -23,13 +23,13 @@ app.use('/api/tracks', trackRoutes); // Track routes
 app.use('/api/auth', authRoutes); // Authentication routes
 
 // Default route
-app.get('/', (req, res) => {
-    res.send('Welcome to YouPlaylist! 🎶');
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to YouPlaylist! 🎶');
 });
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
-module.exports = app;
+export default app;

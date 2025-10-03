@@ -43,35 +43,35 @@
 - Paths shown below assume single project - adjust based on plan.md structure
 
 ## Phase 3.1: Setup
-- [ ] T001 Create `tsconfig.json` for the backend in `backend/tsconfig.json`.
-- [ ] T002 Install TypeScript and `@types/*` dev dependencies in `backend/package.json`.
-- [ ] T003 [P] Configure ESLint and Prettier for TypeScript in `backend/.eslintrc.js` and `backend/.prettierrc.js`.
-- [ ] T004 Update `backend/package.json` scripts for TypeScript build and run commands.
+- [X] T001 Create `tsconfig.json` for the backend in `backend/tsconfig.json`.
+- [X] T002 Install TypeScript and `@types/*` dev dependencies in `backend/package.json`.
+- [X] T003 [P] Configure ESLint and Prettier for TypeScript in `backend/.eslintrc.js` and `backend/.prettierrc.js`.
+- [X] T004 Update `backend/package.json` scripts for TypeScript build and run commands.
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T005 [P] Write integration tests for User authentication and management in `backend/src/tests/user.test.ts`.
-- [ ] T006 [P] Write integration tests for Playlist creation and management in `backend/src/tests/playlist.test.ts`.
-- [ ] T007 [P] Write integration tests for Track addition and management in `backend/src/tests/track.test.ts`.
-- [ ] T008 [P] Write integration tests for `yt-stream` integration in `backend/src/tests/youtube.test.ts`.
+- [X] T005 [P] Write integration tests for User authentication and management in `backend/src/tests/user.test.ts`.
+- [X] T006 [P] Write integration tests for Playlist creation and management in `backend/src/tests/playlist.test.ts`.
+- [X] T007 [P] Write integration tests for Track addition and management in `backend/src/tests/track.test.ts`.
+- [X] T008 [P] Write integration tests for `yt-stream` integration in `backend/src/tests/youtube.test.ts`.
 
 ## Phase 3.3: Core Implementation (Migration & Refactoring)
-- [ ] T009 [P] Migrate `backend/src/models/User.js` to `backend/src/models/User.ts` with TypeScript types.
-- [ ] T010 [P] Migrate `backend/src/models/Playlist.js` to `backend/src/models/Playlist.ts` with TypeScript types.
-- [ ] T011 [P] Migrate `backend/src/models/Track.js` to `backend/src/models/Track.ts` with TypeScript types.
-- [ ] T012 [P] Migrate `backend/src/utils/auth.js` to `backend/src/utils/auth.ts` with TypeScript types.
-- [ ] T013 [P] Migrate `backend/src/utils/redisClient.js` to `backend/src/utils/redisClient.ts` with TypeScript types.
-- [ ] T014 [P] Migrate `backend/src/config/db.js` to `backend/src/config/db.ts` with TypeScript types.
-- [ ] T015 [P] Migrate `backend/src/middlewares/authMiddleware.js` to `backend/src/middlewares/authMiddleware.ts` with TypeScript types.
-- [ ] T016 [P] Migrate `backend/src/services/youtubeService.js` to `backend/src/services/youtubeService.ts` with TypeScript types.
-- [ ] T017 [P] Migrate `backend/src/services/streamService.js` to `backend/src/services/streamService.ts` with TypeScript types.
-- [ ] T018 Refactor and migrate `backend/src/controllers/authController.js` to `backend/src/controllers/authController.ts` with types and improved architecture.
-- [ ] T019 Refactor and migrate `backend/src/controllers/playlistController.js` to `backend/src/controllers/playlistController.ts` with types and improved architecture.
-- [ ] T020 Refactor and migrate `backend/src/controllers/trackController.js` to `backend/src/controllers/trackController.ts` with types and improved architecture.
-- [ ] T021 Migrate `backend/src/routes/authRoutes.js` to `backend/src/routes/authRoutes.ts`.
-- [ ] T022 Migrate `backend/src/routes/playlistRoutes.js` to `backend/src/routes/playlistRoutes.ts`.
-- [ ] T023 Migrate `backend/src/routes/trackRoutes.js` to `backend/src/routes/trackRoutes.ts`.
-- [ ] T024 Migrate `backend/src/app.js` to `backend/src/app.ts`.
+- [X] T009 [P] Migrate `backend/src/models/User.js` to `backend/src/models/User.ts` with TypeScript types.
+- [X] T010 [P] Migrate `backend/src/models/Playlist.js` to `backend/src/models/Playlist.ts` with TypeScript types.
+- [X] T011 [P] Migrate `backend/src/models/Track.js` to `backend/src/models/Track.ts` with TypeScript types.
+- [X] T012 [P] Migrate `backend/src/utils/auth.js` to `backend/src/utils/auth.ts` with TypeScript types.
+- [X] T013 [P] Migrate `backend/src/utils/redisClient.js` to `backend/src/utils/redisClient.ts` with TypeScript types.
+- [X] T014 [P] Migrate `backend/src/config/db.js` to `backend/src/config/db.ts` with TypeScript types.
+- [X] T015 [P] Migrate `backend/src/middlewares/authMiddleware.js` to `backend/src/middlewares/authMiddleware.ts` with TypeScript types.
+- [X] T016 [P] Migrate `backend/src/services/youtubeService.js` to `backend/src/services/youtubeService.ts` with TypeScript types.
+- [X] T017 [P] Migrate `backend/src/services/streamService.js` to `backend/src/services/streamService.ts` with TypeScript types.
+- [X] T018 Refactor and migrate `backend/src/controllers/authController.js` to `backend/src/controllers/authController.ts` with types and improved architecture.
+- [X] T019 Refactor and migrate `backend/src/controllers/playlistController.js` to `backend/src/controllers/playlistController.ts` with types and improved architecture.
+- [X] T020 Refactor and migrate `backend/src/controllers/trackController.js` to `backend/src/controllers/trackController.ts` with types and improved architecture.
+- [X] T021 Migrate `backend/src/routes/authRoutes.js` to `backend/src/routes/authRoutes.ts`.
+- [X] T022 Migrate `backend/src/routes/playlistRoutes.js` to `backend/src/routes/playlistRoutes.ts`.
+- [X] T023 Migrate `backend/src/routes/trackRoutes.js` to `backend/src/routes/trackRoutes.ts`.
+- [X] T024 Migrate `backend/src/app.js` to `backend/src/app.ts`.
 
 ## Phase 3.4: Integration & Performance
 - [ ] T025 Implement caching mechanisms (e.g., Redis integration for API responses) in `backend/src/services/cacheService.ts`.
