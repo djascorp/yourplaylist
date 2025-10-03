@@ -39,7 +39,7 @@
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
 **Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
+**Project Type**: Mobile + API (Frontend: React Native Expo, Backend: Node.js)  
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
@@ -47,7 +47,9 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Architectural Separation**: The plan MUST adhere to the defined frontend (React Native Expo) and backend (Node.js) separation.
+- [ ] **Code Quality and Maintainability**: The plan MUST incorporate tasks and considerations for established coding standards, documentation, and maintainable design.
+- [ ] **Test-Driven Development (TDD)**: The plan MUST prioritize automated testing (unit, integration, E2E) before implementation, aligning with TDD principles.
 
 ## Project Structure
 
@@ -70,19 +72,7 @@ specs/[###-feature]/
   not include Option labels.
 -->
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+# Option 3: Mobile + API (when "iOS/Android" detected)
 backend/
 ├── src/
 │   ├── models/
@@ -96,17 +86,9 @@ frontend/
 │   ├── pages/
 │   └── services/
 └── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: The project will follow the Mobile + API structure, with a `backend/` directory for Node.js services and a `frontend/` directory for the React Native Expo application.
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -216,4 +198,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v0.2.0 - See `/memory/constitution.md`*

@@ -23,6 +23,14 @@ YourPlaylist is a collaborative playlist management web application. Create play
 
 ---
 
+## **Development Principles**
+This project adheres to the following core development principles:
+- **Architectural Separation**: Clear separation between frontend (React Native Expo) and backend (Node.js).
+- **Code Quality & Maintainability**: Commitment to established coding standards, documentation, and modular design.
+- **Test-Driven Development (TDD)**: Emphasis on automated testing (unit, integration, E2E) to ensure correctness and prevent regressions.
+
+---
+
 ## **Installation**
 
 1. **Clone the repository**:
